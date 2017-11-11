@@ -13,7 +13,14 @@ import co.miniforge.corey.mediatracker.media_store.Md5IdHelper;
  */
 
 public class MediaItem {
-    public static int defaultId = 0;
+
+    /*
+    * Assignment 5: Media Tracker Part 2
+    * Refactoring
+    */
+
+    //Remove the public static defaulted field
+    //public static int defaultId = 0;
 
     public String id;
     public String title;
@@ -32,11 +39,46 @@ public class MediaItem {
         }
     }
 
+    /*
+    * Assignment 5: Media Tracker Part 2
+    * Refactoring
+    */
+
     public MediaItem(){
-        this.id = Md5IdHelper.idForObject(defaultId++);
+        //update line from
+        //this.id = Md5IdHelper.idForObject(defaultId++);
+        //to this.id = Md5IdHelper.idForObject(this);
+        this.id = Md5IdHelper.idForObject(this);
         this.title = "defaultTitle";
         this.description = "defaultDescription";
         this.url = "defaultUrl";
+    }
+
+    //you will need to have a java enum named MediaItemType with
+    //the following values: Generic, TV, Movie
+
+    //Will pull type value from the JSON object
+    MediaItemType getTypeForString(String value){
+        switch (value){
+            case "TV":
+                return  MediaItemType.TV;
+            case "Movie":
+                return  MediaItemType.Movie;
+            default:
+                return MediaItemType.Generic;
+        }
+    }
+
+    //Will be used to save the type into a json object more efficiently
+    String getStringForType (MediaItemType type){
+        switch (type) {
+            case Movie:
+                return "Movie";
+            case TV:
+                return "TV";
+            default:
+                return "Generic";
+        }
     }
 
     public JSONObject toJson(){
