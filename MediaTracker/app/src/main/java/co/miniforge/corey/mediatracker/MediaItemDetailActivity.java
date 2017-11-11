@@ -21,6 +21,7 @@ import static co.miniforge.corey.mediatracker.MyListActivity.mediaExtra;
  * back to MyListActivity and puts the MediaItem into the intent (If you are stuck on that, read through
  * the code in MyListActivity)
  */
+
 public class MediaItemDetailActivity extends AppCompatActivity
 {
     @Override
