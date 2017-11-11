@@ -68,6 +68,21 @@ public class MediaViewHolder extends RecyclerView.ViewHolder
             }
         });
 
-    }
+        /*
+        * Assignment 5: Media Tracker Part 2
+        * Delete Functionality
+        */
 
+        // click and hold for a second in order to trigger it
+        inflated.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View v)
+            {
+                ((MyListActivity)context).deleteMediaItem(mediaItem);
+                //Change the return value to true
+                return true;
+            }
+        });
+    }
 }
