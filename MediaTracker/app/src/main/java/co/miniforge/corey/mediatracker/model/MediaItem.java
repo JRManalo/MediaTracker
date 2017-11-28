@@ -5,6 +5,7 @@ import android.util.Log;
 import org.json.JSONObject;
 
 import java.security.MessageDigest;
+import java.util.Date;
 
 import co.miniforge.corey.mediatracker.media_store.Md5IdHelper;
 
@@ -26,6 +27,7 @@ public class MediaItem {
     public String title;
     public String description;
     public String url;
+    public Date type;
 
     public MediaItem(JSONObject jsonObject){
         try{

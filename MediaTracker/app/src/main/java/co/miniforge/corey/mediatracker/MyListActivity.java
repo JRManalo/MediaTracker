@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import co.miniforge.corey.mediatracker.media_recycler.MediaRecyclerAdapter;
+import co.miniforge.corey.mediatracker.media_sorter.MediaItemSortHelper;
 import co.miniforge.corey.mediatracker.media_store.MediaStorageUtil;
 import co.miniforge.corey.mediatracker.model.MediaItem;
 
@@ -127,13 +129,10 @@ public class MyListActivity extends AppCompatActivity {
     * Delete Functionality
     */
 
-    public void deleteMediaItem(MediaItem item)
-    {
+    public void deleteMediaItem(MediaItem item) {
         //This function will loop through the items in the media item list
-        for(int i = 0; i < mediaItems.size(); i++)
-        {
-            if(mediaItems.get(i).id.equals(item.id))
-            {
+        for (int i = 0; i < mediaItems.size(); i++) {
+            if (mediaItems.get(i).id.equals(item.id)) {
                 //remove the media item that has a matching id
                 mediaItems.remove(i);
                 break;
@@ -143,4 +142,26 @@ public class MyListActivity extends AppCompatActivity {
             updateMediaItems(storageUtil.getMediaDataList());
         }
     }
+
+    /*
+    * Assignment 6: Media Tracker part 3
+    * Sorting media items
+    */
+
+        public boolean createOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_my_list, menu);
+        return true;
+    }
+        public boolean OptionsItemSelected(MenuItem item)
+        {
+            switch (item.getItemId())
+            {
+                case R.id.type:
+                    updateMediaItems(MediaItemSortHelper.sortByType(mediaItems));
+                case R.id.name:
+                    updateMediaItems(MediaItemSortHelper.sortByName(mediaItems));
+            }
+            return true;
+        }
 }
